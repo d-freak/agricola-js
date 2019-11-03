@@ -38,6 +38,10 @@ export default class GameMaster {
         controller.entry(this._info, playerID, playerName);
     }
     
+    removeObserver(observer) {
+        this._info.removeObserver(observer);
+    }
+    
     start(playerID) {
         const controller = this._createController();
         controller.start(this._info, playerID);
