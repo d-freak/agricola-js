@@ -55,10 +55,14 @@ export default class CommandController {
         case 's':
         case 'start':
             if (this._master.closed) {
-                for (let i = this._master.info.playerCount; i < 4; i++) {
-                    const id = `CPU0${i}`;
-                    const name = this._automaton.defaultAI(id);
-                    this._master.entry(id, name);
+                if (!isNaN(paramList[0])) {
+                    const playerCount = parseInt(paramList[0]);
+                    const maxPlayer = playerCount < 5 ? playerCount : 5;
+                    for (let i = this._master.info.playerCount; i < maxPlayer; i++) {
+                        const id = `CPU0${i}`;
+                        const name = this._automaton.defaultAI(id);
+                        this._master.entry(id, name);
+                    }
                 }
                 this._master.start(playerID);
             }

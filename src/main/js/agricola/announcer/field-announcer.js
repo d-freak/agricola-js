@@ -63,11 +63,11 @@ export default class FieldAnnouncer {
     }
     
     _onEntryPlayer(info, playerName) {
-        this.write(`${playerName}の参加を受け付けました。 （残り${4 - info.playerCount}人）`);
+        this.write(`${playerName}の参加を受け付けました。 （残り${5 - info.playerCount}人まで）`);
     }
     
     _onEntryClosed(info, playerName) {
-        this.write(`悪いな${playerName}、このゲームは4人用なんだ。`);
+        this.write(`悪いな${playerName}、このゲームは5人用なんだ。`);
     }
     
 }

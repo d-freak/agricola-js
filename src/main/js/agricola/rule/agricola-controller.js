@@ -16,7 +16,7 @@ export default class AgricolaController {
     }
     
     entry(info, playerID, playerName) {
-        if (info.playerCount < 4) {
+        if (info.playerCount < 5) {
             info.playerNameTable[playerID] = playerName;
             info.notifyAllObserver(MessageEvent.ENTRY_PLAYER, playerID, playerName);
         }
