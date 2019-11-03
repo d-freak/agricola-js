@@ -9,7 +9,6 @@
 export default {
     
     GAME_START         : 'GAME_START',
-    GAME_DRAW          : 'GAME_DRAW',
     GAME_SET           : 'GAME_SET',
     GAME_CLOSE         : 'GAME_CLOSE',
     

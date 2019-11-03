@@ -9,7 +9,6 @@
 export default {
     
     GAME_START         : 0x000001,
-    GAME_DRAW          : 0x000002,
     GAME_SET           : 0x000003,
     GAME_CLOSE         : 0x000004,
     
