@@ -1,0 +1,45 @@
+{
+  "name": "agricola-js",
+  "version": "1.0.0",
+  "description": "agricola on js.",
+  "main": "gulpfile.babel.js",
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "env": {
+      "test": {
+        "plugins": [
+          "istanbul"
+        ]
+      }
+    }
+  },
+  "scripts": {
+    "compile": "gulp compile",
+    "pretest": "gulp ready-to-test",
+    "test": "mocha cache/test -R dot --require @babel/register --es_staging",
+    "clean": "gulp clean"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d-freak/agricola-js.git"
+  },
+  "author": "d-freak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/d-freak/agricola-js/issues"
+  },
+  "homepage": "https://github.com/d-freak/agricola-js#readme",
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/register": "^7.6.2",
+    "babel-plugin-istanbul": "^5.2.0",
+    "cross-env": "^6.0.3",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "mocha": "^6.2.2"
+  }
+}
