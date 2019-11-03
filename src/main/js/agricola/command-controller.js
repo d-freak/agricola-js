@@ -20,7 +20,6 @@ export default class CommandController {
         this._master = new GameMaster();
         this._automaton = new Automaton();
         this._dataDirPath = '';
-        this._startPlayerCount = 4;
         this._master.addObserver(this);
         this._master.addObserver(this._automaton);
         this._master.addObserver(this._fieldAnnouncer);
@@ -34,9 +33,8 @@ export default class CommandController {
         this._playerAnnouncerList = [];
     }
     
-    initialize(dataDirPath, startPlayerCount) {
+    initialize(dataDirPath) {
         this._dataDirPath = dataDirPath;
-        this._startPlayerCount = startPlayerCount ? Number(startPlayerCount) : 1;
     }
     
     onCommand(commands, playerAnnouncer = undefined) {
@@ -52,9 +50,6 @@ export default class CommandController {
                 }
                 this._addObserver(new ConsolePlayerAnnouncer(playerID));
                 this._master.entry(playerID, paramList[0]);
-                if (this._master.info.playerCount === this._startPlayerCount) {
-                    this.onCommand(playerID + ' s');
-                }
             }
             break;
         case 's':
