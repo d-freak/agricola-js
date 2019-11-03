@@ -26,45 +26,34 @@ export default class AgricolaController {
     }
     
     start(info, playerID) {
+        this._decideSeat(info);
         this._draft(info, playerID);
     }
     
     
     
-    _ready(info, playerID) {
-        if (info.remainDeck === 0) {
-            info.notifyAllObserver(MessageEvent.GAME_DRAW);
-            info.notifyAllObserver(GameEvent.GAME_DRAW);
-            return;
-        }
-        info.activeTsumo = info.draw();
-        info.callMode = false;
-        info.notifyAllObserver(MessageEvent.TURN_READY);
-        info.notifyAllObserver(GameEvent.TURN_READY);
+    _decideSeat(info) {
+        const playerIDList = Object.keys(info.playerNameTable);
+        AgricolaUtil.shuffleList(playerIDList);
+        info.seatList = playerIDList;
     }
     
     _draft(info, playerID) {
-        // TODO 未実装
-        /*
-        info.deck = JanUtil.createDeck();
-        JanUtil.shuffleList(info.deck);
+        info.draftDeckTable = AgricolaUtil.createDraftDeckTable(info.playerCount);
         
         // TODO リプレイ用のデータ保存
         
-        info.forEachPlayer((playerID) => {
-            const janpaiList = info.deck.splice(0, 13);
-            JanUtil.sortJanpaiList(janpaiList);
-            info.playerHandTable[playerID] = new Hand(janpaiList);
-            info.playerHandTable[playerID].updateWaitTable();
-            info.playerRiverTable[playerID] = new River();
-        });
-        
-        // TODO リーチフラグ
-        
-        info.clearTurnCount();
-        info.activePlayerID = info.playerID(Wind.TON);
-        this._ready(info, playerID);
-         */
+        this._draftReady(info, playerID);
+    }
+    
+    _draftReady(info, playerID) {
+        if (info.remainDeck === 0) {
+            info.notifyAllObserver(MessageEvent.GAME_SET);
+            info.notifyAllObserver(GameEvent.GAME_SET);
+            return;
+        }
+        info.notifyAllObserver(MessageEvent.DRAFT_READY);
+        info.notifyAllObserver(GameEvent.DRAFT_READY);
     }
     
 }
