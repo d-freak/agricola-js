@@ -38,7 +38,7 @@ export default class AgricolaUtil {
     
     
     static _cards(type, playerCount, cardPool) {
-        const DATABASE_PATH = '/../../../json/agricola_database.json';
+        const DATABASE_PATH = '/../../../../../json/agricola_database.json';
         const json = readFileSync(__dirname + DATABASE_PATH);
         const database = JSON.parse(json);
         const cardIDs = Object.keys(database)
