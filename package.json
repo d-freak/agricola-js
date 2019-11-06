@@ -3,6 +3,22 @@
   "version": "1.0.0",
   "description": "agricola on js.",
   "main": "gulpfile.babel.js",
+  "scripts": {
+    "clean": "gulp clean",
+    "compile": "gulp compile",
+    "pretest": "gulp ready-to-test",
+    "test": "mocha cache/test -R dot --require @babel/register --es_staging"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d-freak/agricola-js.git"
+  },
+  "author": "d-freak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/d-freak/agricola-js/issues"
+  },
+  "homepage": "https://github.com/d-freak/agricola-js#readme",
   "babel": {
     "presets": [
       "@babel/preset-env"
@@ -15,22 +31,6 @@
       }
     }
   },
-  "scripts": {
-    "compile": "gulp compile",
-    "pretest": "gulp ready-to-test",
-    "test": "mocha cache/test -R dot --require @babel/register --es_staging",
-    "clean": "gulp clean"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/d-freak/agricola-js.git"
-  },
-  "author": "d-freak",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/d-freak/agricola-js/issues"
-  },
-  "homepage": "https://github.com/d-freak/agricola-js#readme",
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
