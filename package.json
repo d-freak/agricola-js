@@ -5,7 +5,7 @@
   "main": "gulpfile.babel.js",
   "scripts": {
     "pretest": "gulp ready-to-test",
-    "start": "babel-node src/main/js/agricola/agricola-debug.js",
+    "start": "babel-node src/main/agricola/agricola-debug.js",
     "test": "mocha cache/test -R dot --require @babel/register --es_staging"
   },
   "repository": {

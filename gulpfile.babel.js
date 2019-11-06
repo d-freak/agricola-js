@@ -10,8 +10,8 @@ import gulp from 'gulp';
 
 
 (() => {
-    const mainSourceDir = 'src/main/js';
-    const testSourceDir = 'src/test/js';
+    const mainSourceDir = 'src/main';
+    const testSourceDir = 'src/test';
     const testTargetDir = 'cache/test';
     
     gulp.task('clean', del.bind(null,
