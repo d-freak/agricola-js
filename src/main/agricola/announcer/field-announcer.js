@@ -71,6 +71,18 @@ export default class FieldAnnouncer {
     }
     
     _onDraftReady(info) {
+        const buffer = [];
+        Object.keys(info.draftDeckTable).forEach((key) => {
+            buffer.push('```');
+            [ 'minorImprovements', 'occupations' ].forEach((type) => {
+                buffer.push(info.draftDeckTable[key][type]
+                            .map((card) => { return card.id })
+                            .join(','));
+            });
+            buffer.push('```');
+        });
+        // デバッグ用。最終的には消す
+        this.write(buffer.join('\n'));
     }
     
     _onEntryPlayer(info, playerName) {

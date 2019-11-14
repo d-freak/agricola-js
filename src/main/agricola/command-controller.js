@@ -46,7 +46,6 @@ export default class CommandController {
         case 'entry':
             if (this._master.closed) {
                 if (playerAnnouncer) {
-                    playerAnnouncer.initialize(playerID);
                     this._addObserver(playerAnnouncer);
                 }
                 this._addObserver(new ConsolePlayerAnnouncer(playerID));

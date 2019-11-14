@@ -13,18 +13,32 @@ export default class AgricolaInfo extends Observable {
     constructor() {
         super();
         this._draftDeckTable = {};
+        this._draftTurnCount = 0;
         this._playerNameTable = {};
         this._seatList = [];
     }
     
     clear() {
         this._draftDeckTable = {};
+        this._draftTurnCount = 0;
         this._playerNameTable = {};
         this._seatList = [];
     }
     
+    clearDraftTurnCount() {
+        this._draftTurnCount = 0;
+    }
+    
+    increaseDraftTurnCount() {
+        this._draftTurnCount++;
+    }
+    
     get draftDeckTable() {
         return this._draftDeckTable;
+    }
+    
+    get draftTurnCount() {
+        return this._draftTurnCount;
     }
     
     get playerCount() {

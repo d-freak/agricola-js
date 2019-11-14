@@ -65,19 +65,34 @@ export default class PlayerAnnouncer {
     }
     
     _onDraftReady(info) {
-        // TODO 未実装
-        /*
-        if (info.activePlayerID === this._playerID) {
-            const buffer = [];
-            buffer.push(`${info.turnCount}巡目`);
-            buffer.push(`場風：${info.field.wind}　自風：${info.activePlayerWind}　残り枚数：${info.remainDeck}`);
-            buffer.push(`${this._convertHandToString(info.activePlayerHand)} ${info.activeTsumo}`);
-            this.write(buffer.join('\n'));
-        }
-         */
+        const buffer = [];
+        const seatIndex = info.seatList
+                          .findIndex((id) => { return id === this._playerID });
+        const index = (seatIndex + info.draftTurnCount) % info.playerCount;
+        [ 'minorImprovements', 'occupations' ].forEach((type) => {
+            info.draftDeckTable[index][type].forEach((card) => {
+                buffer.push(`\`\`\`${this._convertToString(card)}\`\`\``);
+            });
+        });
+        this.write(buffer.join('\n'));
     }
     
     _onGameInfo(info, playerID) {
+    }
+    
+    _convertToString(cardData) {
+        const lines = [ 
+            cardData.name,
+            `${cardData.type}   ${cardData.id}`,
+            `コスト: ${(cardData.cost || '-')}`,
+            `条件: ${(cardData.condition || '-')}`,
+            `勝利点: ${(cardData.point || '-')}`,
+            `人数: ${(cardData.player_number || '-')}`,
+            cardData.text,
+            '-----',
+            cardData.text_en,
+        ];  
+        return lines.join('\n');
     }
     
 }
