@@ -14,8 +14,9 @@ import GameMaster from './game-master';
 
 export default class CommandController {
     
-    constructor() {
-        this._fieldAnnouncer = new ConsoleFieldAnnouncer();
+    constructor(fieldAnnouncer) {
+        this._fieldAnnouncer = fieldAnnouncer ? fieldAnnouncer :
+                                                new ConsoleFieldAnnouncer();
         this._playerAnnouncerList = [];
         this._master = new GameMaster();
         this._automaton = new Automaton();
