@@ -30,6 +30,12 @@ export default class FieldAnnouncer {
         case MessageEvent.DRAFT_READY:
             this._onDraftReady(target);
             break;
+        case MessageEvent.DRAFT_INVALID:
+            this._onDraftInvalid(target);
+            break;
+        case MessageEvent.DRAFT_WRONG:
+            this._onDraftWrong(target);
+            break;
         case MessageEvent.ENTRY_PLAYER:
             this._onEntryPlayer(target, param.value);
             break;
@@ -74,15 +80,19 @@ export default class FieldAnnouncer {
         const buffer = [];
         Object.keys(info.draftDeckTable).forEach((key) => {
             buffer.push('```');
-            [ 'minorImprovements', 'occupations' ].forEach((type) => {
-                buffer.push(info.draftDeckTable[key][type]
-                            .map((card) => { return card.id })
-                            .join(','));
-            });
+            const idList = info.draftDeckTable[key].allID;
+            idList.splice(7, 0, '\n');
+            buffer.push(idList.join(',').replace(/,\n,/, '\n'));
             buffer.push('```');
         });
         // デバッグ用。最終的には消す
         this.write(buffer.join('\n'));
+    }
+    
+    _onDraftInvalid(info) {
+    }
+    
+    _onDraftWrong(info) {
     }
     
     _onEntryPlayer(info, playerName) {

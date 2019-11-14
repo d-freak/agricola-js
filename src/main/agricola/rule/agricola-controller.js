@@ -25,6 +25,10 @@ export default class AgricolaController {
         }
     }
     
+    keep(info, playerID, card) {
+        // TODO 未実装
+    }
+    
     start(info, playerID) {
         this._decideSeat(info);
         info.notifyAllObserver(MessageEvent.DRAFT_START);

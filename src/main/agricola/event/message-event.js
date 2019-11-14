@@ -14,6 +14,10 @@ export default {
     
     DRAFT_START        : 'DRAFT_START',
     DRAFT_READY        : 'DRAFT_READY',
+    DRAFT_INVALID      : 'DRAFT_INVALID',
+    DRAFT_WRONG        : 'DRAFT_WRONG',
+    //TODO 未実装
+    //DRAFT_KEPT         : 'DRAFT_KEPT',
     //TODO 未実装
     //TURN_READY         : 'TURN_READY',
     //TODO 未実装

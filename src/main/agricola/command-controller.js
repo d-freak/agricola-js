@@ -67,6 +67,12 @@ export default class CommandController {
                 this._master.start(playerID);
             }
             break;
+        case 'k':
+        case 'keep':
+            if (!this._master.closed) {
+                this._master.keep(playerID, paramList[0]);
+            }
+            break;
         case 'i':
         case 'info':
             // TODO 未実装

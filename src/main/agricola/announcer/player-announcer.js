@@ -31,6 +31,12 @@ export default class PlayerAnnouncer {
         case MessageEvent.DRAFT_READY:
             this._onDraftReady(target);
             break;
+        case MessageEvent.DRAFT_INVALID:
+            this._onDraftInvalid(target);
+            break;
+        case MessageEvent.DRAFT_WRONG:
+            this._onDraftWrong(target);
+            break;
         default:
             break;
         }
@@ -66,15 +72,18 @@ export default class PlayerAnnouncer {
     
     _onDraftReady(info) {
         const buffer = [];
-        const seatIndex = info.seatList
-                          .findIndex((id) => { return id === this._playerID });
-        const index = (seatIndex + info.draftTurnCount) % info.playerCount;
-        [ 'minorImprovements', 'occupations' ].forEach((type) => {
-            info.draftDeckTable[index][type].forEach((card) => {
-                buffer.push(`\`\`\`${this._convertToString(card)}\`\`\``);
-            });
+        info.draftDeck(this._playerID).all.forEach((card) => {
+            buffer.push(`\`\`\`${this._convertToString(card)}\`\`\``);
         });
         this.write(buffer.join('\n'));
+    }
+    
+    _onDraftInvalid(info) {
+        this.write('無効な指定です。再指定してください。');
+    }
+    
+    _onDraftWrong(info) {
+        this.write('指定されたカードがデッキにありません。再指定してください。');
     }
     
     _onGameInfo(info, playerID) {
