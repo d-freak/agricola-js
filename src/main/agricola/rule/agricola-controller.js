@@ -27,6 +27,8 @@ export default class AgricolaController {
     
     start(info, playerID) {
         this._decideSeat(info);
+        info.notifyAllObserver(MessageEvent.DRAFT_START);
+        info.notifyAllObserver(GameEvent.DRAFT_START);
         this._draft(info, playerID);
     }
     

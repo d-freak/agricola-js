@@ -24,6 +24,9 @@ export default class FieldAnnouncer {
         case MessageEvent.GAME_CLOSE:
             this._onGameClose(param.playerID);
             break;
+        case MessageEvent.DRAFT_START:
+            this._onDraftStart(target);
+            break;
         case MessageEvent.DRAFT_READY:
             this._onDraftReady(target);
             break;
@@ -57,6 +60,14 @@ export default class FieldAnnouncer {
     
     _onGameClose(playerID) {
         this.write(' * おわた * ');
+    }
+    
+    _onDraftStart(info) {
+        const seat = info.seatList.map((id) => {
+            return info.playerNameTable[id];
+        }).join('、');
+        this.write(`席順は${seat}です。`);
+        this.write('ドラフトを開始します。');
     }
     
     _onDraftReady(info) {

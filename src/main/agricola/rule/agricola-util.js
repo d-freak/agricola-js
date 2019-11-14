@@ -4,8 +4,7 @@
  * @author masaue
  */
 
-import fs from 'fs'
-import path from 'path'
+import database from './../../../../json/agricola_database.json';
 
 import Deck from './deck';
 
@@ -39,9 +38,6 @@ export default class AgricolaUtil {
     
     
     static _cards(type, playerCount, cardPool) {
-        const DATABASE_PATH = '/../../../../json/agricola_database.json';
-        const json = fs.readFileSync(path.join(__dirname + DATABASE_PATH));
-        const database = JSON.parse(json);
         const cardIDs = Object.keys(database)
                .filter((id) => { return database[id].type === type })
                .filter((id) => { return cardPool.includes(database[id].cardset) })

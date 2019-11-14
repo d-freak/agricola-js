@@ -12,6 +12,7 @@ export default {
     GAME_SET           : 'GAME_SET',
     GAME_CLOSE         : 'GAME_CLOSE',
     
+    DRAFT_START        : 'DRAFT_START',
     DRAFT_READY        : 'DRAFT_READY',
     //TODO 未実装
     //TURN_READY         : 'TURN_READY',

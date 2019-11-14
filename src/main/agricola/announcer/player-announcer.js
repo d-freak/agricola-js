@@ -25,6 +25,9 @@ export default class PlayerAnnouncer {
         case MessageEvent.GAME_CLOSE:
             this._onGameClose(param.playerID);
             break;
+        case MessageEvent.DRAFT_START:
+            this._onDraftStart(target);
+            break;
         case MessageEvent.DRAFT_READY:
             this._onDraftReady(target);
             break;
@@ -56,6 +59,9 @@ export default class PlayerAnnouncer {
     
     _onGameClose(playerID) {
         this.write(' * おわた * ');
+    }
+    
+    _onDraftStart(info) {
     }
     
     _onDraftReady(info) {
