@@ -6,7 +6,7 @@
 
 import database from './../../../../json/agricola_database.json';
 
-import Deck from './deck';
+import DraftDeck from './draft-deck';
 
 
 
@@ -17,10 +17,10 @@ export default class AgricolaUtil {
         const minorImprovements = this._cards('小さい進歩', playerCount, cardPool);
         const occupations = this._cards('職業', playerCount, cardPool);
         [...Array(playerCount).keys()].forEach((count) => {
-            const deck = new Deck();
-            deck.minorImprovements = minorImprovements.splice(0, 7);
-            deck.occupations = occupations.splice(0, 7);
-            draftDeckTable[count] = deck;
+            const draftDeck = new DraftDeck();
+            draftDeck.minorImprovements = minorImprovements.splice(0, 7);
+            draftDeck.occupations = occupations.splice(0, 7);
+            draftDeckTable[count] = draftDeck;
         });
         return draftDeckTable;
     }

@@ -14,6 +14,7 @@ export default class AgricolaInfo extends Observable {
         super();
         this._draftDeckTable = {};
         this._draftTurnCount = 0;
+        this._handTable = {};
         this._playerNameTable = {};
         this._seatList = [];
     }
@@ -21,6 +22,7 @@ export default class AgricolaInfo extends Observable {
     clear() {
         this._draftDeckTable = {};
         this._draftTurnCount = 0;
+        this._handTable = {};
         this._playerNameTable = {};
         this._seatList = [];
     }
@@ -30,10 +32,13 @@ export default class AgricolaInfo extends Observable {
     }
     
     draftDeck(playerID) {
-        const seatIndex = this._seatList
-                          .findIndex((id) => { return id === playerID });
+        const seatIndex = this._seatList.indexOf(playerID);
         const index = (seatIndex + this._draftTurnCount) % this.playerCount;
         return this._draftDeckTable[index];
+    }
+    
+    forEachPlayer(lambda) {
+        Object.keys(this._playerNameTable).forEach(lambda);
     }
     
     increaseDraftTurnCount() {
@@ -46,6 +51,10 @@ export default class AgricolaInfo extends Observable {
     
     get draftTurnCount() {
         return this._draftTurnCount;
+    }
+    
+    get handTable() {
+        return this._handTable;
     }
     
     get playerCount() {

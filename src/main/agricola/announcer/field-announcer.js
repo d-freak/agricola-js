@@ -11,6 +11,7 @@ import MessageEvent from '../event/message-event';
 export default class FieldAnnouncer {
     
     constructor() {
+        this._DEFAULT_LENGTH = 7;
     }
     
     update(target, param) {
@@ -81,7 +82,7 @@ export default class FieldAnnouncer {
         Object.keys(info.draftDeckTable).forEach((key) => {
             buffer.push('```');
             const idList = info.draftDeckTable[key].allID;
-            idList.splice(7, 0, '\n');
+            idList.splice(this._DEFAULT_LENGTH - info.draftTurnCount, 0, '\n');
             buffer.push(idList.join(',').replace(/,\n,/, '\n'));
             buffer.push('```');
         });

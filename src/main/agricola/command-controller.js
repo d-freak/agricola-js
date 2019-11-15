@@ -120,13 +120,12 @@ export default class CommandController {
     }
     
     _onDraftReady(info) {
-        // TODO 未実装
-        /*
-        // TODO ダミーツモ切り実装
-        if (/CPU0[1-4]/.test(info.activePlayerID)) {
-            this._master.discardTsumo(info.activePlayerID);
-        }
-         */
+        info.forEachPlayer((playerID) => {
+            if (/CPU0[1-4]/.test(playerID)) {
+                this._master.keep(playerID, info.draftDeck(playerID).headID);
+                this._master.keep(playerID, info.draftDeck(playerID).tailID);
+            }
+        });
     }
     
 }

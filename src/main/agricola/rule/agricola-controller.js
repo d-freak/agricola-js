@@ -6,6 +6,7 @@
 
 import AgricolaUtil from './agricola-util';
 import GameEvent from '../event/game-event';
+import Hand from './hand';
 import MessageEvent from '../event/message-event';
 
 
@@ -25,8 +26,25 @@ export default class AgricolaController {
         }
     }
     
-    keep(info, playerID, card) {
-        // TODO 未実装
+    keep(info, playerID, cardID) {
+        const card = info.draftDeck(playerID).delete(cardID, info.draftTurnCount);
+        if (!card) {
+            info.notifyAllObserver(MessageEvent.DRAFT_WRONG);
+            info.notifyAllObserver(GameEvent.DRAFT_WRONG);
+            return;
+        }
+        info.handTable[playerID].add(card);
+        const ok = Object.keys(info.handTable).every((playerID) => {
+            return info.handTable[playerID].ok(info.draftTurnCount);
+        });
+        if (ok) {
+            if (info.draftTurnCount === 6) {
+                //TODO ドラフト終了
+                return;
+            }
+            info.increaseDraftTurnCount();
+            this._draftReady(info, playerID);
+        }
     }
     
     start(info, playerID) {
@@ -34,6 +52,9 @@ export default class AgricolaController {
         info.notifyAllObserver(MessageEvent.DRAFT_START);
         info.notifyAllObserver(GameEvent.DRAFT_START);
         info.clearDraftTurnCount();
+        info.forEachPlayer((playerID) => {
+            info.handTable[playerID] = new Hand();
+        });
         this._draft(info, playerID);
     }
     

@@ -44,12 +44,8 @@ export default class GameMaster {
             this._info.notifyAllObserver(MessageEvent.DRAFT_INVALID);
             return;
         }
-        if (!this._hasCard(playerID, target)) {
-            this._info.notifyAllObserver(MessageEvent.DRAFT_WRONG);
-            return;
-        }
         const controller = this._createController();
-        controller.keep(this._info, playerID, target);
+        controller.keep(this._info, playerID, target.toUpperCase());
     }
     
     removeObserver(observer) {
@@ -82,11 +78,6 @@ export default class GameMaster {
     
     _createController() {
         return new AgricolaController();
-    }
-    
-    _hasCard(playerID, target) {
-        const allID = this._info.draftDeck(playerID).allID;
-        return allID.includes(target.toUpperCase());
     }
     
     _isCard(target) {
