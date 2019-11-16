@@ -41,12 +41,14 @@ export default class AgricolaController {
         });
         if (!ok) {
             if (info.handTable[playerID].ok(info.draftTurnCount)) {
-                info.notifyAllObserver(MessageEvent.DRAFT_DECIDED);
-                info.notifyAllObserver(GameEvent.DRAFT_DECIDED);
+                info.notifyAllObserver(MessageEvent.DRAFT_DECIDED, playerID);
+                info.notifyAllObserver(GameEvent.DRAFT_DECIDED, playerID);
             }
             return;
         }
         info.increaseDraftTurnCount();
+        info.notifyAllObserver(MessageEvent.DRAFT_NEXT_TURN, playerID);
+        info.notifyAllObserver(GameEvent.DRAFT_NEXT_TURN, playerID);
         this._draftReady(info, playerID);
     }
     

@@ -44,7 +44,10 @@ export default class FieldAnnouncer {
             this._onDraftKept(target, param.value);
             break;
         case MessageEvent.DRAFT_DECIDED:
-            this._onDraftDecided(target);
+            this._onDraftDecided(target, param.playerID);
+            break;
+        case MessageEvent.DRAFT_NEXT_TURN:
+            this._onDraftNextTurn(target, param.playerID);
             break;
         case MessageEvent.DRAFT_LAST_TURN:
             this._onDraftLastTurn(target);
@@ -116,11 +119,17 @@ export default class FieldAnnouncer {
     _onDraftKept(info, cardID) {
     }
     
-    _onDraftDecided(info) {
+    _onDraftDecided(info, playerID) {
+        this.write(`${info.playerNameTable[playerID]}の選択が終了しました。`);
         const thinking = info.seatList.filter((id) => {
             return !info.handTable[id].ok(info.draftTurnCount);
         }).map((id) => { return info.playerNameTable[id] }).join('、');
         this.write(`${thinking}がまだ選択中です。しばらくお待ちください。`);
+    }
+    
+    _onDraftNextTurn(info, playerID) {
+        this.write(`${info.playerNameTable[playerID]}の選択が終了しました。`);
+        this.write('次ターンへ進みます。');
     }
     
     _onDraftLastTurn(info) {
@@ -165,7 +174,7 @@ export default class FieldAnnouncer {
     
     _writeDraftDeck(info) {
         const buffer = [];
-        buffer.push(`ドラフト${info.draftTurnCount + 1}巡目です。`);
+        buffer.push(`ドラフト${info.draftTurnCount + 1}ターン目です。`);
         // デバッグ用。最終的には消す
         Object.keys(info.draftDeckTable).forEach((key) => {
             buffer.push('```');

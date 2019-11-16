@@ -44,7 +44,10 @@ export default class PlayerAnnouncer {
             this._onDraftKept(target, param.value);
             break;
         case MessageEvent.DRAFT_DECIDED:
-            this._onDraftDecided(target);
+            this._onDraftDecided(target, param.playerID);
+            break;
+        case MessageEvent.DRAFT_NEXT_TURN:
+            this._onDraftNextTurn(target, param.playerID);
             break;
         case MessageEvent.DRAFT_LAST_TURN:
             this._onDraftLastTurn(target);
@@ -115,7 +118,10 @@ export default class PlayerAnnouncer {
         this.write(`${cardID}をハンドに追加しました。`);
     }
     
-    _onDraftDecided(info) {
+    _onDraftDecided(info, playerID) {
+    }
+    
+    _onDraftNextTurn(info, playerID) {
     }
     
     _onDraftLastTurn(info) {
