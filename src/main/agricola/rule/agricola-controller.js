@@ -37,14 +37,15 @@ export default class AgricolaController {
         const ok = Object.keys(info.handTable).every((playerID) => {
             return info.handTable[playerID].ok(info.draftTurnCount);
         });
-        if (ok) {
-            if (info.draftTurnCount === 6) {
-                //TODO ドラフト終了
-                return;
+        if (!ok) {
+            if (info.handTable[playerID].ok(info.draftTurnCount)) {
+                info.notifyAllObserver(MessageEvent.DRAFT_DECIDED);
+                info.notifyAllObserver(GameEvent.DRAFT_DECIDED);
             }
-            info.increaseDraftTurnCount();
-            this._draftReady(info, playerID);
+            return;
         }
+        info.increaseDraftTurnCount();
+        this._draftReady(info, playerID);
     }
     
     start(info, playerID) {
@@ -75,9 +76,9 @@ export default class AgricolaController {
     }
     
     _draftReady(info, playerID) {
-        if (info.remainDeck === 0) {
-            info.notifyAllObserver(MessageEvent.GAME_SET);
-            info.notifyAllObserver(GameEvent.GAME_SET);
+        if (info.draftTurnCount === 7) {
+            info.notifyAllObserver(MessageEvent.DRAFT_END);
+            info.notifyAllObserver(GameEvent.DRAFT_END);
             return;
         }
         info.notifyAllObserver(MessageEvent.DRAFT_READY);

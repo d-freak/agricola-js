@@ -37,6 +37,12 @@ export default class PlayerAnnouncer {
         case MessageEvent.DRAFT_WRONG:
             this._onDraftWrong(target);
             break;
+        case MessageEvent.DRAFT_DECIDED:
+            this._onDraftDecided(target);
+            break;
+        case MessageEvent.DRAFT_END:
+            this._onDraftEnd(target);
+            break;
         default:
             break;
         }
@@ -85,6 +91,12 @@ export default class PlayerAnnouncer {
     
     _onDraftWrong(info) {
         this.write('指定されたカードがデッキにありません。再指定してください。');
+    }
+    
+    _onDraftDecided(info) {
+    }
+    
+    _onDraftEnd(info) {
     }
     
     _onGameInfo(info, playerID) {

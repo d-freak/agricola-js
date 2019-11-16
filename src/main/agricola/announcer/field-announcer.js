@@ -37,6 +37,12 @@ export default class FieldAnnouncer {
         case MessageEvent.DRAFT_WRONG:
             this._onDraftWrong(target);
             break;
+        case MessageEvent.DRAFT_DECIDED:
+            this._onDraftDecided(target);
+            break;
+        case MessageEvent.DRAFT_END:
+            this._onDraftEnd(target);
+            break;
         case MessageEvent.ENTRY_PLAYER:
             this._onEntryPlayer(target, param.value);
             break;
@@ -79,6 +85,8 @@ export default class FieldAnnouncer {
     
     _onDraftReady(info) {
         const buffer = [];
+        buffer.push(`ドラフト${info.draftTurnCount + 1}巡目です。`);
+        // デバッグ用。最終的には消す
         Object.keys(info.draftDeckTable).forEach((key) => {
             buffer.push('```');
             const idList = info.draftDeckTable[key].allID;
@@ -86,7 +94,6 @@ export default class FieldAnnouncer {
             buffer.push(idList.join(',').replace(/,\n,/, '\n'));
             buffer.push('```');
         });
-        // デバッグ用。最終的には消す
         this.write(buffer.join('\n'));
     }
     
@@ -94,6 +101,28 @@ export default class FieldAnnouncer {
     }
     
     _onDraftWrong(info) {
+    }
+    
+    _onDraftDecided(info) {
+        const thinking = info.seatList.filter((id) => {
+            return !info.handTable[id].ok(info.draftTurnCount);
+        }).map((id) => { return info.playerNameTable[id] }).join('、');
+        this.write(`${thinking}がまだ選択中です。しばらくお待ちください。`);
+    }
+    
+    _onDraftEnd(info) {
+        const buffer = [];
+        buffer.push('ドラフトを終了しました。');
+        buffer.push('それぞれのハンドは以下のようになりました。');
+        Object.keys(info.handTable).forEach((key) => {
+            buffer.push(`${info.playerNameTable[key]}`);
+            buffer.push('```');
+            const idList = info.handTable[key].allID;
+            idList.splice(7, 0, '\n');
+            buffer.push(idList.join(',').replace(/,\n,/, '\n'));
+            buffer.push('```');
+        });
+        this.write(buffer.join('\n'));
     }
     
     _onEntryPlayer(info, playerName) {

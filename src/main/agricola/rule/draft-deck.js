@@ -23,17 +23,6 @@ export default class DraftDeck extends Deck {
         return this._delete(this._occupations, ID, turnCount);
     }
     
-    get all() {
-        const all = [];
-        all.push(...this._minorImprovements);
-        all.push(...this._occupations);
-        return all;
-    }
-    
-    get allID() {
-        return this._IDs(this.all);
-    }
-    
     get headID() {
         return this._minorImprovements[0].id;
     }
@@ -43,10 +32,6 @@ export default class DraftDeck extends Deck {
     }
     
     
-    
-    _IDs(cardList) {
-        return cardList.map((card) => { return card.id });
-    }
     
     _canDelete(cardList, ID, turnCount) {
         return cardList.length === this._DEFAULT_LENGTH - turnCount &&

@@ -16,6 +16,8 @@ export default {
     DRAFT_READY        : 0x000102,
     DRAFT_INVALID      : 0x000103,
     DRAFT_WRONG        : 0x000104,
+    DRAFT_DECIDED      : 0x000105,
+    DRAFT_END          : 0x000106,
     //TODO 未実装
     //TURN_READY         : 0x000201,
     //TODO 未実装
