@@ -79,10 +79,15 @@ export default class AgricolaController {
         if (info.draftTurnCount === 7) {
             info.notifyAllObserver(MessageEvent.DRAFT_END);
             info.notifyAllObserver(GameEvent.DRAFT_END);
-            return;
         }
-        info.notifyAllObserver(MessageEvent.DRAFT_READY);
-        info.notifyAllObserver(GameEvent.DRAFT_READY);
+        else if (info.draftTurnCount === 6) {
+            info.notifyAllObserver(MessageEvent.DRAFT_LAST_TURN);
+            info.notifyAllObserver(GameEvent.DRAFT_LAST_TURN);
+        }
+        else {
+            info.notifyAllObserver(MessageEvent.DRAFT_READY);
+            info.notifyAllObserver(GameEvent.DRAFT_READY);
+        }
     }
     
 }

@@ -110,6 +110,9 @@ export default class CommandController {
         case GameEvent.DRAFT_READY:
             this._onDraftReady(target);
             break;
+        case GameEvent.DRAFT_LAST_TURN:
+            this._onDraftLastTurn(target);
+            break;
         default:
             break;
         }
@@ -125,10 +128,20 @@ export default class CommandController {
     _onDraftReady(info) {
         info.forEachPlayer((playerID) => {
             if (/CPU0[1-4]/.test(playerID)) {
-                this._master.keep(playerID, info.draftDeck(playerID).headID);
-                this._master.keep(playerID, info.draftDeck(playerID).tailID);
+                this._autoKeep(info, playerID);
             }
         });
+    }
+    
+    _onDraftLastTurn(info) {
+        info.forEachPlayer((playerID) => {
+            this._autoKeep(info, playerID);
+        });
+    }
+    
+    _autoKeep(info, playerID) {
+        this._master.keep(playerID, info.draftDeck(playerID).headID);
+        this._master.keep(playerID, info.draftDeck(playerID).tailID);
     }
     
 }

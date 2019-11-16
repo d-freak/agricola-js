@@ -43,6 +43,9 @@ export default class PlayerAnnouncer {
         case MessageEvent.DRAFT_DECIDED:
             this._onDraftDecided(target);
             break;
+        case MessageEvent.DRAFT_LAST_TURN:
+            this._onDraftLastTurn(target);
+            break;
         case MessageEvent.DRAFT_END:
             this._onDraftEnd(target);
             break;
@@ -106,6 +109,10 @@ export default class PlayerAnnouncer {
     }
     
     _onDraftDecided(info) {
+    }
+    
+    _onDraftLastTurn(info) {
+        this._onDraftReady(info);
     }
     
     _onDraftEnd(info) {

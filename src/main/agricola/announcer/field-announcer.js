@@ -43,6 +43,9 @@ export default class FieldAnnouncer {
         case MessageEvent.DRAFT_DECIDED:
             this._onDraftDecided(target);
             break;
+        case MessageEvent.DRAFT_LAST_TURN:
+            this._onDraftLastTurn(target);
+            break;
         case MessageEvent.DRAFT_END:
             this._onDraftEnd(target);
             break;
@@ -97,17 +100,7 @@ export default class FieldAnnouncer {
     }
     
     _onDraftReady(info) {
-        const buffer = [];
-        buffer.push(`ドラフト${info.draftTurnCount + 1}巡目です。`);
-        // デバッグ用。最終的には消す
-        Object.keys(info.draftDeckTable).forEach((key) => {
-            buffer.push('```');
-            const idList = info.draftDeckTable[key].allID;
-            idList.splice(this._DEFAULT_LENGTH - info.draftTurnCount, 0, '\n');
-            buffer.push(idList.join(',').replace(/,\n,/, '\n'));
-            buffer.push('```');
-        });
-        this.write(buffer.join('\n'));
+        this._writeDraftDeck(info);
     }
     
     _onDraftInvalid(info) {
@@ -121,6 +114,11 @@ export default class FieldAnnouncer {
             return !info.handTable[id].ok(info.draftTurnCount);
         }).map((id) => { return info.playerNameTable[id] }).join('、');
         this.write(`${thinking}がまだ選択中です。しばらくお待ちください。`);
+    }
+    
+    _onDraftLastTurn(info) {
+        this.write('最終ターンなので自動選択します。');
+        this._writeDraftDeck(info);
     }
     
     _onDraftEnd(info) {
@@ -156,6 +154,20 @@ export default class FieldAnnouncer {
     
     _onEntryClosed(info, playerName) {
         this.write(`悪いな${playerName}、このゲームは5人用なんだ。`);
+    }
+    
+    _writeDraftDeck(info) {
+        const buffer = [];
+        buffer.push(`ドラフト${info.draftTurnCount + 1}巡目です。`);
+        // デバッグ用。最終的には消す
+        Object.keys(info.draftDeckTable).forEach((key) => {
+            buffer.push('```');
+            const idList = info.draftDeckTable[key].allID;
+            idList.splice(this._DEFAULT_LENGTH - info.draftTurnCount, 0, '\n');
+            buffer.push(idList.join(',').replace(/,\n,/, '\n'));
+            buffer.push('```');
+        });
+        this.write(buffer.join('\n'));
     }
     
 }

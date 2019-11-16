@@ -18,6 +18,7 @@ export default {
     DRAFT_INVALID      : 'DRAFT_INVALID',
     DRAFT_WRONG        : 'DRAFT_WRONG',
     DRAFT_DECIDED      : 'DRAFT_DECIDED',
+    DRAFT_LAST_TURN    : 'DRAFT_LAST_TURN',
     DRAFT_END          : 'DRAFT_END',
     
     HELP               : 'HELP',
