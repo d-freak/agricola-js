@@ -43,6 +43,7 @@ export default class CommandController {
         const playerID = paramList.shift();
         const command = paramList.shift().toLowerCase();
         switch (command) {
+        case 'e':
         case 'entry':
             if (this._master.closed) {
                 this._addObserver(playerAnnouncer ? playerAnnouncer :
@@ -65,6 +66,7 @@ export default class CommandController {
                 this._master.start(playerID);
             }
             break;
+        case 'h':
         case 'hand':
             if (!this._master.closed) {
                 this._master.hand(playerID);
@@ -86,11 +88,9 @@ export default class CommandController {
         case 'load':
             // TODO 未実装
             break;
-        case 'h':
         case 'help':
-            // TODO 未実装
+            this._master.help(playerID);
             break;
-        case 'e':
         case 'end':
         case 'exit':
         case 'quit':

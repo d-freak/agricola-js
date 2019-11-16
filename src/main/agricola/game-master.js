@@ -31,6 +31,7 @@ export default class GameMaster {
                 this._info.notifyAllObserver(MessageEvent.GAME_FORCE_QUIT);
             }
             this._closed = true;
+            this._info.clear();
         }
     }
     
@@ -41,6 +42,10 @@ export default class GameMaster {
     
     hand(playerID) {
         this._info.notifyObserver(MessageEvent.HAND, playerID);
+    }
+    
+    help(playerID) {
+        this._info.notifyAllObserver(MessageEvent.HELP);
     }
     
     keep(playerID, target) {

@@ -25,6 +25,9 @@ export default class FieldAnnouncer {
         case MessageEvent.GAME_CLOSE:
             this._onGameClose(param.playerID);
             break;
+        case MessageEvent.GAME_FORCE_QUIT:
+            this._onGameForceQuit(param.playerID);
+            break;
         case MessageEvent.DRAFT_START:
             this._onDraftStart(target);
             break;
@@ -45,6 +48,9 @@ export default class FieldAnnouncer {
             break;
         case MessageEvent.HAND:
             this._onHand(target);
+            break;
+        case MessageEvent.HELP:
+            this._onHelp(target);
             break;
         case MessageEvent.ENTRY_PLAYER:
             this._onEntryPlayer(target, param.value);
@@ -76,6 +82,10 @@ export default class FieldAnnouncer {
     
     _onGameClose(playerID) {
         this.write(' * おわた * ');
+    }
+    
+    _onGameForceQuit(playerID) {
+        this.write('強制終了しました。');
     }
     
     _onDraftStart(info) {
@@ -125,6 +135,15 @@ export default class FieldAnnouncer {
             buffer.push(idList.join(',').replace(/,\n,/, '\n'));
             buffer.push('```');
         });
+        this.write(buffer.join('\n'));
+    }
+    
+    _onHelp(info) {
+        const buffer = [];
+        buffer.push('```');
+        buffer.push('e, entry:参加   s, start (人数):(人数で)開始 ※ 足りない人数はAIが補う');
+        buffer.push('h, hand:手札確認   k, keep:手札へキープ   end, exit, quit:終了   help:ヘルプ');
+        buffer.push('```');
         this.write(buffer.join('\n'));
     }
     

@@ -25,6 +25,9 @@ export default class PlayerAnnouncer {
         case MessageEvent.GAME_CLOSE:
             this._onGameClose(param.playerID);
             break;
+        case MessageEvent.GAME_FORCE_QUIT:
+            this._onGameForceQuit(param.playerID);
+            break;
         case MessageEvent.DRAFT_START:
             this._onDraftStart(target);
             break;
@@ -42,6 +45,9 @@ export default class PlayerAnnouncer {
             break;
         case MessageEvent.DRAFT_END:
             this._onDraftEnd(target);
+            break;
+        case MessageEvent.HELP:
+            this._onHelp(target);
             break;
         case MessageEvent.HAND:
             this._onHand(target);
@@ -76,6 +82,9 @@ export default class PlayerAnnouncer {
         this.write(' * おわた * ');
     }
     
+    _onGameForceQuit(playerID) {
+    }
+    
     _onDraftStart(info) {
     }
     
@@ -100,6 +109,9 @@ export default class PlayerAnnouncer {
     }
     
     _onDraftEnd(info) {
+    }
+    
+    _onHelp(info) {
     }
     
     _onHand(info) {

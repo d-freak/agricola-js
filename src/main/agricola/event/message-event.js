@@ -11,6 +11,7 @@ export default {
     GAME_START         : 'GAME_START',
     GAME_SET           : 'GAME_SET',
     GAME_CLOSE         : 'GAME_CLOSE',
+    GAME_FORCE_QUIT    : 'GAME_FORCE_QUIT',
     
     DRAFT_START        : 'DRAFT_START',
     DRAFT_READY        : 'DRAFT_READY',
@@ -19,6 +20,7 @@ export default {
     DRAFT_DECIDED      : 'DRAFT_DECIDED',
     DRAFT_END          : 'DRAFT_END',
     
+    HELP               : 'HELP',
     HAND               : 'HAND',
     //TODO 未実装
     //DRAFT_KEPT         : 'DRAFT_KEPT',
