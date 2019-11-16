@@ -45,10 +45,8 @@ export default class CommandController {
         switch (command) {
         case 'entry':
             if (this._master.closed) {
-                if (playerAnnouncer) {
-                    this._addObserver(playerAnnouncer);
-                }
-                this._addObserver(new ConsolePlayerAnnouncer(playerID));
+                this._addObserver(playerAnnouncer ? playerAnnouncer :
+                                                    new ConsolePlayerAnnouncer(playerID));
                 this._master.entry(playerID, paramList[0]);
             }
             break;
@@ -65,6 +63,11 @@ export default class CommandController {
                     }
                 }
                 this._master.start(playerID);
+            }
+            break;
+        case 'hand':
+            if (!this._master.closed) {
+                this._master.hand(playerID);
             }
             break;
         case 'k':

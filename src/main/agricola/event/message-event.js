@@ -18,6 +18,8 @@ export default {
     DRAFT_WRONG        : 'DRAFT_WRONG',
     DRAFT_DECIDED      : 'DRAFT_DECIDED',
     DRAFT_END          : 'DRAFT_END',
+    
+    HAND               : 'HAND',
     //TODO 未実装
     //DRAFT_KEPT         : 'DRAFT_KEPT',
     //TODO 未実装

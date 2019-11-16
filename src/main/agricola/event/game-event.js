@@ -18,6 +18,8 @@ export default {
     DRAFT_WRONG        : 0x000104,
     DRAFT_DECIDED      : 0x000105,
     DRAFT_END          : 0x000106,
+
+    HAND               : 0x000201,
     //TODO 未実装
     //TURN_READY         : 0x000201,
     //TODO 未実装

@@ -43,6 +43,9 @@ export default class PlayerAnnouncer {
         case MessageEvent.DRAFT_END:
             this._onDraftEnd(target);
             break;
+        case MessageEvent.HAND:
+            this._onHand(target);
+            break;
         default:
             break;
         }
@@ -97,6 +100,15 @@ export default class PlayerAnnouncer {
     }
     
     _onDraftEnd(info) {
+    }
+    
+    _onHand(info) {
+        const buffer = [];
+        buffer.push('```');
+        const idList = info.handTable[this._playerID].allID;
+        buffer.push(idList.join(','));
+        buffer.push('```');
+        this.write(buffer.join('\n'));
     }
     
     _onGameInfo(info, playerID) {

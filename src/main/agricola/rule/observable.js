@@ -27,6 +27,14 @@ export default class Observable {
         });
     }
     
+    notifyObserver(event, playerID, value = undefined) {
+        const param = { event: event, playerID: playerID, value: value };
+        const observer = this._observerList.find((observer) => {
+            return observer.playerID === playerID;
+        });
+        observer.update(this, param);
+    }
+    
     removeObserver(observer) {
         this._observerList.forEach((o, index) => {
             if (observer === o) {

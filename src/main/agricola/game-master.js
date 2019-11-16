@@ -39,6 +39,10 @@ export default class GameMaster {
         controller.entry(this._info, playerID, playerName);
     }
     
+    hand(playerID) {
+        this._info.notifyObserver(MessageEvent.HAND, playerID);
+    }
+    
     keep(playerID, target) {
         if (!this._isCard(target)) {
             this._info.notifyAllObserver(MessageEvent.DRAFT_INVALID);

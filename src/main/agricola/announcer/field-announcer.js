@@ -43,6 +43,9 @@ export default class FieldAnnouncer {
         case MessageEvent.DRAFT_END:
             this._onDraftEnd(target);
             break;
+        case MessageEvent.HAND:
+            this._onHand(target);
+            break;
         case MessageEvent.ENTRY_PLAYER:
             this._onEntryPlayer(target, param.value);
             break;
@@ -123,6 +126,9 @@ export default class FieldAnnouncer {
             buffer.push('```');
         });
         this.write(buffer.join('\n'));
+    }
+    
+    _onHand(info) {
     }
     
     _onEntryPlayer(info, playerName) {
