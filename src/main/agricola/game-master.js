@@ -50,7 +50,7 @@ export default class GameMaster {
     
     keep(playerID, target) {
         if (!this._isCard(target)) {
-            this._info.notifyAllObserver(MessageEvent.DRAFT_INVALID);
+            this._info.notifyObserver(MessageEvent.DRAFT_INVALID, playerID);
             return;
         }
         const controller = this._createController();

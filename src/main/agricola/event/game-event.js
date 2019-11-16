@@ -17,9 +17,10 @@ export default {
     DRAFT_READY        : 0x000102,
     DRAFT_INVALID      : 0x000103,
     DRAFT_WRONG        : 0x000104,
-    DRAFT_DECIDED      : 0x000105,
-    DRAFT_LAST_TURN    : 0x000106,
-    DRAFT_END          : 0x000107,
+    DRAFT_KEPT         : 0x000105,
+    DRAFT_DECIDED      : 0x000106,
+    DRAFT_LAST_TURN    : 0x000107,
+    DRAFT_END          : 0x000108,
 
     HELP               : 0x000201,
     HAND               : 0x000202,

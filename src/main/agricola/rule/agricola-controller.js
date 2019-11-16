@@ -29,10 +29,12 @@ export default class AgricolaController {
     keep(info, playerID, cardID) {
         const card = info.draftDeck(playerID).delete(cardID, info.draftTurnCount);
         if (!card) {
-            info.notifyAllObserver(MessageEvent.DRAFT_WRONG);
-            info.notifyAllObserver(GameEvent.DRAFT_WRONG);
+            info.notifyObserver(MessageEvent.DRAFT_WRONG, playerID);
+            info.notifyObserver(GameEvent.DRAFT_WRONG, playerID);
             return;
         }
+        info.notifyObserver(MessageEvent.DRAFT_KEPT, playerID, cardID);
+        info.notifyObserver(GameEvent.DRAFT_KEPT, playerID, cardID);
         info.handTable[playerID].add(card);
         const ok = Object.keys(info.handTable).every((playerID) => {
             return info.handTable[playerID].ok(info.draftTurnCount);

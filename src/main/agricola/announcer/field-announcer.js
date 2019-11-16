@@ -40,6 +40,9 @@ export default class FieldAnnouncer {
         case MessageEvent.DRAFT_WRONG:
             this._onDraftWrong(target);
             break;
+        case MessageEvent.DRAFT_KEPT:
+            this._onDraftKept(target, param.value);
+            break;
         case MessageEvent.DRAFT_DECIDED:
             this._onDraftDecided(target);
             break;
@@ -108,6 +111,9 @@ export default class FieldAnnouncer {
     }
     
     _onDraftWrong(info) {
+    }
+    
+    _onDraftKept(info, cardID) {
     }
     
     _onDraftDecided(info) {

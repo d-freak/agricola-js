@@ -32,7 +32,10 @@ export default class Observable {
         const observer = this._observerList.find((observer) => {
             return observer.playerID === playerID;
         });
-        observer.update(this, param);
+        // CPUのplayer-announcerは存在しないため
+        if (observer) {
+            observer.update(this, param);
+        }
     }
     
     removeObserver(observer) {
