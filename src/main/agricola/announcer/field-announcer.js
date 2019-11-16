@@ -81,6 +81,7 @@ export default class FieldAnnouncer {
     }
     
     _onGameSet(info, playerID) {
+        this.write('終了しました。');
     }
     
     _onGameClose(playerID) {
