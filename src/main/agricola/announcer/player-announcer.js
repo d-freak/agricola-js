@@ -99,7 +99,7 @@ export default class PlayerAnnouncer {
     
     _onDraftReady(info) {
         const buffer = [];
-        buffer.push(`ドラフト${info.draftTurnCount + 1}巡目です。`);
+        this.write(`------------------------------ ドラフト${info.draftTurnCount + 1}ターン目です ------------------------------`);
         info.draftDeck(this._playerID).all.forEach((card) => {
             buffer.push(`\`\`\`${this._convertToString(card)}\`\`\``);
         });
