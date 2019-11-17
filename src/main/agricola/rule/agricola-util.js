@@ -18,8 +18,9 @@ export default class AgricolaUtil {
         const occupations = this._cards('職業', playerCount, cardPool);
         [...Array(playerCount).keys()].forEach((count) => {
             const draftDeck = new DraftDeck();
-            draftDeck.minorImprovements = minorImprovements.splice(0, 7);
-            draftDeck.occupations = occupations.splice(0, 7);
+            draftDeck.minorImprovements =
+                minorImprovements.splice(0, draftDeck.defaultLength);
+            draftDeck.occupations = occupations.splice(0, draftDeck.defaultLength);
             draftDeckTable[count] = draftDeck;
         });
         return draftDeckTable;

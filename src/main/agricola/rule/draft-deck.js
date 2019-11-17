@@ -23,6 +23,10 @@ export default class DraftDeck extends Deck {
         return this._delete(this._occupations, ID, turnCount);
     }
     
+    get defaultLength() {
+        return this._DEFAULT_LENGTH;
+    }
+    
     get headID() {
         return this._minorImprovements[0].id;
     }

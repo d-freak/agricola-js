@@ -33,7 +33,8 @@ export default class AgricolaInfo extends Observable {
     
     draftDeck(playerID) {
         const seatIndex = this._seatList.indexOf(playerID);
-        const index = (seatIndex + this._draftTurnCount) % this.playerCount;
+        const index = (this._draftDeckTable[0].defaultLength +
+                       seatIndex - this._draftTurnCount) % this.playerCount;
         return this._draftDeckTable[index];
     }
     
