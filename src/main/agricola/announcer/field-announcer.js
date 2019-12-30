@@ -140,10 +140,10 @@ export default class FieldAnnouncer {
         const buffer = [];
         buffer.push('ドラフトを終了しました。');
         buffer.push('それぞれのハンドは以下のようになりました。');
-        Object.keys(info.handTable).forEach((key) => {
-            buffer.push(`${info.playerNameTable[key]}`);
+        info.seatList.forEach((id) => {
+            buffer.push(`${info.playerNameTable[id]}`);
             buffer.push('```');
-            const idList = info.handTable[key].allID;
+            const idList = info.handTable[id].allID;
             idList.splice(7, 0, '\n');
             buffer.push(idList.join(',').replace(/,\n,/, '\n'));
             buffer.push('```');
