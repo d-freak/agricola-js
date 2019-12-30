@@ -140,14 +140,9 @@ export default class FieldAnnouncer {
         const buffer = [];
         buffer.push('ドラフトを終了しました。');
         buffer.push('それぞれのハンドは以下のようになりました。');
-        info.seatList.forEach((id) => {
-            buffer.push(`${info.playerNameTable[id]}`);
-            buffer.push('```');
-            const idList = info.handTable[id].allID;
-            idList.splice(7, 0, '\n');
-            buffer.push(idList.join(',').replace(/,\n,/, '\n'));
-            buffer.push('```');
-        });
+        buffer.push(...this._handIDList(info));
+        buffer.push('ソート版は以下になります。');
+        buffer.push(...this._handIDList(info, true));
         this.write(buffer.join('\n'));
     }
     
@@ -169,6 +164,22 @@ export default class FieldAnnouncer {
     
     _onEntryClosed(info, playerName) {
         this.write(`悪いな${playerName}、このゲームは5人用なんだ。`);
+    }
+    
+    _handIDList(info, sort = false) {
+        const buffer = [];
+        info.seatList.forEach((id) => {
+            buffer.push(`${info.playerNameTable[id]}`);
+            buffer.push('```');
+            const idList = info.handTable[id].allID;
+            if (sort) {
+                idList.sort();
+            }
+            idList.splice(7, 0, '\n');
+            buffer.push(idList.join(',').replace(/,\n,/, '\n'));
+            buffer.push('```');
+        });
+        return buffer;
     }
     
 }
