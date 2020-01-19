@@ -1,17 +1,18 @@
 /**
- * agricola-controller.js
+ * seven-card-draft-controller.js
  * 
  * @author masaue
  */
 
-import AgricolaUtil from './agricola-util';
-import GameEvent from '../event/game-event';
-import Hand from './hand';
-import MessageEvent from '../event/message-event';
+import GameEvent from '../../event/game-event';
+import MessageEvent from '../../event/message-event';
+
+import AgricolaUtil from '../agricola-util';
+import Hand from '../hand';
 
 
 
-export default class AgricolaController {
+export default class SevenCardDraftController {
     
     constructor() {
     }
@@ -49,7 +50,7 @@ export default class AgricolaController {
         info.increaseDraftTurnCount();
         info.notifyAllObserver(MessageEvent.DRAFT_NEXT_TURN, playerID);
         info.notifyAllObserver(GameEvent.DRAFT_NEXT_TURN, playerID);
-        this._draftReady(info, playerID);
+        this._ready(info, playerID);
     }
     
     start(info, playerID) {
@@ -60,7 +61,11 @@ export default class AgricolaController {
         info.forEachPlayer((playerID) => {
             info.handTable[playerID] = new Hand();
         });
-        this._draft(info, playerID);
+        info.draftDeckTable = AgricolaUtil.createDraftDeckTable(info.playerCount);
+        
+        // TODO リプレイ用のデータ保存
+        
+        this._ready(info, playerID);
     }
     
     
@@ -71,15 +76,7 @@ export default class AgricolaController {
         info.seatList = playerIDList;
     }
     
-    _draft(info, playerID) {
-        info.draftDeckTable = AgricolaUtil.createDraftDeckTable(info.playerCount);
-        
-        // TODO リプレイ用のデータ保存
-        
-        this._draftReady(info, playerID);
-    }
-    
-    _draftReady(info, playerID) {
+    _ready(info, playerID) {
         if (info.draftTurnCount === 7) {
             info.notifyAllObserver(MessageEvent.DRAFT_END);
             info.notifyAllObserver(GameEvent.DRAFT_END);

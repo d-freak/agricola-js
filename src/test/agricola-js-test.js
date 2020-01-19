@@ -4,8 +4,8 @@
  * @author masaue
  */
 
-import './agricola/game-master-test';
-
-import './agricola/rule/agricola-controller-test';
+import './agricola/rule/controller/seven-card-draft-controller-test';
 
 import './agricola/rule/agricola-util-test';
+
+import './agricola/game-master-test';

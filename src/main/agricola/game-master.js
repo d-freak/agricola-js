@@ -4,9 +4,11 @@
  * @author masaue
  */
 
-import AgricolaController from './rule/agricola-controller';
 import GameEvent from './event/game-event';
 import MessageEvent from './event/message-event';
+
+import SevenCardDraftController from './rule/controller/seven-card-draft-controller';
+
 import AgricolaInfo from './rule/agricola-info';
 
 
@@ -86,7 +88,7 @@ export default class GameMaster {
     
     
     _createController() {
-        return new AgricolaController();
+        return new SevenCardDraftController();
     }
     
     _isCard(target) {
