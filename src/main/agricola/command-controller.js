@@ -128,18 +128,18 @@ export default class CommandController {
     _onDraftReady(info) {
         info.forEachPlayer((playerID) => {
             if (/CPU0[1-4]/.test(playerID)) {
-                this._autoKeep(info, playerID);
+                this._autoKeep(playerID, info);
             }
         });
     }
     
     _onDraftLastTurn(info) {
         info.forEachPlayer((playerID) => {
-            this._autoKeep(info, playerID);
+            this._autoKeep(playerID, info);
         });
     }
     
-    _autoKeep(info, playerID) {
+    _autoKeep(playerID, info = this._master.info) {
         this._master.keep(playerID, info.draftDeck(playerID).headID);
         this._master.keep(playerID, info.draftDeck(playerID).tailID);
     }
